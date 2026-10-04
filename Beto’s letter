@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For You 💌</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fce4ec;
+        font-family: Georgia, serif;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .envelope {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        background: #f8b4c8;
+        margin: auto;
+        cursor: pointer;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+        transform: scale(1.05);
+    }
+
+    .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-top: 110px solid #f48fb1;
+        transform-origin: top;
+        transition: transform 0.8s;
+        z-index: 3;
+    }
+
+    .heart {
+        position: absolute;
+        top: 75px;
+        left: 130px;
+        font-size: 40px;
+        z-index: 4;
+    }
+
+    .letter {
+        display: none;
+        position: fixed;
+        width: min(90%, 500px);
+        max-height: 80vh;
+        overflow-y: auto;
+        background: #fffaf5;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        animation: appear 0.8s ease;
+        z-index: 10;
+    }
+
+    .letter h1 {
+        color: #d81b60;
+        margin-top: 0;
+    }
+
+    .letter p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #444;
+    }
+
+    .close {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        background: #f48fb1;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .hint {
+        margin-top: 20px;
+        color: #8e5a6b;
+    }
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .confetti {
+        position: fixed;
+        font-size: 25px;
+        animation: fall 2s linear forwards;
+        z-index: 20;
+    }
+
+    @keyframes fall {
+        from {
+            transform: translateY(-50px) rotate(0deg);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="envelope" onclick="openLetter()">
+        <div class="flap"></div>
+        <div class="heart">💌</div>
+    </div>
+
+    <div class="hint">
+        Tap the envelope to open your letter ❤️
+    </div>
+
+</div>
+
+<div class="letter" id="letter">
+
+    <h1>For You ❤️</h1>
+
+    <!-- CHANGE THE TEXT BELOW -->
+    <p>
+        My love,
+    </p>
+
+    <p>
+        I just wanted to leave you a little surprise.
+        Even though this is only a small letter, I hope
+        it makes you smile.
+    </p>
+
+    <p>
+        Thank you for being you and for all the little
+        things that make my days better.
+    </p>
+
+    <p>
+        I love you ❤️
+    </p>
+
+    <p>
+        Yours,
+        <br>
+        [Your name]
+    </p>
+
+    <button class="close" onclick="closeLetter()">Close 💕</button>
+
+</div>
+
+<script>
+
+function openLetter() {
+    document.getElementById("letter").style.display = "block";
+
+    for (let i = 0; i < 25; i++) {
+        let heart = document.createElement("div");
+
+        heart.className = "confetti";
+        heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💕";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration =
+            (1.5 + Math.random() * 2) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+
+function closeLetter() {
+    document.getElementById("letter").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
